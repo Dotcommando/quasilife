@@ -7,7 +7,7 @@ export class GetVersionResponseNotFoundDto {
   @ApiProperty({ example: HttpStatus.NOT_FOUND })
     statusCode: number;
 
-  @ApiProperty({ example: LIFECYCLE_STATUS.LIFECYCLE_NOT_FOUND })
+  @ApiProperty({ example: LIFECYCLE_STATUS.LIFECYCLE_GET_VERSION_NOT_FOUND })
     message: LIFECYCLE_STATUS;
 
   @ApiProperty({ example: null })

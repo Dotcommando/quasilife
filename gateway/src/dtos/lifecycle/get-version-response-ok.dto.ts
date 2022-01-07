@@ -7,7 +7,7 @@ export class GetVersionResponseOkDto {
   @ApiProperty({ example: HttpStatus.OK })
     statusCode: number;
 
-  @ApiProperty({ example: LIFECYCLE_STATUS.LIFECYCLE_OK })
+  @ApiProperty({ example: LIFECYCLE_STATUS.LIFECYCLE_GET_VERSION_OK })
     message: LIFECYCLE_STATUS;
 
   @ApiProperty({
