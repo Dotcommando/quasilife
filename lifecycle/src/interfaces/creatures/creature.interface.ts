@@ -1,7 +1,7 @@
-import { CREATURE_TYPE, GENDER } from '../constants';
-import { ICommonParameters, ICreature, IPermanentModifier, ITemporaryModifier } from '../interfaces';
+import { CREATURE_TYPE, GENDER } from '../../constants';
+import { ICommonParameters, IPermanentModifier, ITemporaryModifier } from './parameters.interface';
 
-export abstract class Creature implements ICreature {
+export interface ICreature {
   startParameters: ICommonParameters;
   permanentModifiers: IPermanentModifier[];
   temporaryModifiers: ITemporaryModifier[];
