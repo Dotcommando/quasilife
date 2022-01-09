@@ -7,6 +7,8 @@ export interface ICommonParameters {
   empathy: number;        // [0, 99.99]
   regeneration: number;   // [0, 99.99]
   health: number;         // [0, 99.99]
+  lifespan: number;       // [0, 99.99]
+  childhoodLength: number; // [0, 99.99]
   memory: number;         // [0, 99.99]
   bodyType: number;       // [0, 99.99], 0 - thin, 99.99 - thick
   behaviorTrend: number;  // [0, 99.99], 0 - introversion, 99.99 - extroversion
@@ -20,6 +22,8 @@ export interface ICommonParameters {
   libido: number;         // [0, 99.99]
   aggressiveness: number; // [0, 99.99]
   gaiety: number;         // [0, 99.99]
+  moralStandards: number; // [0, 99.99]
+  luck: number;           // [0, 99.99]
 }
 
 export enum EFFECT_STATUS {
