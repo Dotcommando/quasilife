@@ -6,8 +6,6 @@ export interface ICreature {
   permanentModifiers: IPermanentModifier[];
   temporaryModifiers: ITemporaryModifier[];
   totalCurrentParameters: ICommonParameters;
-
-  // Species Identity
   gender: GENDER;
   type: CREATURE_TYPE;
   nickName: string;
