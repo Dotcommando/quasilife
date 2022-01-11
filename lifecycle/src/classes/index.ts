@@ -7,3 +7,7 @@ export * from './abstract-moving-control.class';
 export * from './abstract-permanent-modifiers.class';
 export * from './abstract-temporary-modifiers.class';
 export * from './pure-character-factory.class';
+export * from './pure-elf.class';
+export * from './pure-human.class';
+export * from './vampire-character-factory.class';
+export * from './werewolf-character-factory.class';

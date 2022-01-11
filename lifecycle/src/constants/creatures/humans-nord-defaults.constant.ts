@@ -10,7 +10,7 @@ export const NORD_DEFAULTS: IRaceDefaults = {
     empathy: 40,
     regeneration: 15,
     health: 20,
-    lifespan: 10,
+    lifespan: 12,
     childhoodLength: 30,
     memory: 35,
     bodyType: 70,
@@ -26,6 +26,8 @@ export const NORD_DEFAULTS: IRaceDefaults = {
     aggressiveness: 15,
     gaiety: 55,
     moralStandards: 65,
+    beauty: 50,
+    conception: 30,
     luck: 50,
   },
   delta: {
@@ -53,6 +55,8 @@ export const NORD_DEFAULTS: IRaceDefaults = {
     aggressiveness: 3,
     gaiety: 15,
     moralStandards: 7,
+    beauty: 4,
+    conception: 4,
     luck: 2,
   },
 };

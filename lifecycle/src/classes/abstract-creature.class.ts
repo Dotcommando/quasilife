@@ -1,5 +1,11 @@
 import { CREATURE_TYPE, GENDER } from '../constants';
-import { IAbstractCreature, ICommonParameters, IPermanentModifier, ITemporaryModifier } from '../interfaces';
+import {
+  IAbstractCreature,
+  ICommonParameters,
+  ICreateCharacterData,
+  IPermanentModifier,
+  ITemporaryModifier,
+} from '../interfaces';
 import { AbstractBattleClass } from './abstract-battle.class';
 import { AbstractEmotionsClass } from './abstract-emotions.class';
 import { AbstractEnergyClass } from './abstract-energy.class';
@@ -9,6 +15,8 @@ import { AbstractPermanentModifiersClass } from './abstract-permanent-modifiers.
 import { AbstractTemporaryModifiersClass } from './abstract-temporary-modifiers.class';
 
 export abstract class AbstractCreatureClass implements IAbstractCreature {
+  constructor(data: ICreateCharacterData) {}
+
   energyService: AbstractEnergyClass;
   emotionsService: AbstractEmotionsClass;
   battleService: AbstractBattleClass;

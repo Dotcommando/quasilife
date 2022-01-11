@@ -24,6 +24,7 @@ export interface ICommonParameters {
   gaiety: number;         // [0, 99.99]
   moralStandards: number; // [0, 99.99]
   beauty: number;         // [0, 99.99]
+  conception: number;     // [0, 99.99]
   luck: number;           // [0, 99.99]
 }
 

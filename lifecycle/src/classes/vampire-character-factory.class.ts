@@ -7,19 +7,17 @@ import {
   IHuman,
   IMorph,
 } from '../interfaces';
-import { PureElf } from './pure-elf.class';
-import { PureHuman } from './pure-human.class';
 
-export class PureCharacterFactory implements IAbstractCreatureFactory {
+export class VampireCharacterFactory implements IAbstractCreatureFactory {
   public createHuman(data: ICreateHumanCharacterData): IHuman {
-    return new PureHuman(data);
+    return new VampireHuman(data);
   };
 
   public createElf(data: ICreateElfCharacterData): IElf {
-    return new PureElf(data);
+    return new VampireElf(data);
   };
 
   public createMorph(data: ICreateMorphCharacterData): IMorph {
-    return new PureMorph(data);
+    return new VampireMorph(data);
   };
 }

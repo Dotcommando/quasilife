@@ -4,7 +4,6 @@ export * from './create-character-data.interface';
 export * from './create-elf-character-data.interface';
 export * from './create-human-character-data.interface';
 export * from './create-morph-character-data.interface';
-export * from './creature.interface';
 export * from './elf.interface';
 export * from './human.interface';
 export * from './morph.interface';

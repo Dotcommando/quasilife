@@ -1,7 +1,7 @@
 import { CREATURE_TYPE, HUMAN_LIKE_SPECIES } from '../../constants';
-import { ICreature } from './creature.interface';
+import { IAbstractCreature } from './abstract-creature.interface';
 
-export interface IHuman extends ICreature {
+export interface IHuman extends IAbstractCreature {
   type: CREATURE_TYPE.HUMAN_LIKE;
   species: HUMAN_LIKE_SPECIES.HUMANS;
   firstName: string;

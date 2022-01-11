@@ -1,7 +1,7 @@
 import { CREATURE_TYPE, HUMAN_LIKE_SPECIES } from '../../constants';
-import { ICreature } from './creature.interface';
+import { IAbstractCreature } from './abstract-creature.interface';
 
-export interface IMorph extends ICreature {
+export interface IMorph extends IAbstractCreature {
   type: CREATURE_TYPE.HUMAN_LIKE;
   species: HUMAN_LIKE_SPECIES.MORPHS;
   nickName: string;
