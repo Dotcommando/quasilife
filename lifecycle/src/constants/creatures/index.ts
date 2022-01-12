@@ -5,3 +5,5 @@ export * from './humans-ausie-defaults.constant';
 export * from './humans-elder-defaults.constant';
 export * from './humans-nord-defaults.constant';
 export * from './humans-sinie-defaults.constant';
+export * from './morphs-facestealer-defaults.constant';
+export * from './morphs-shifter-defaults.constant';

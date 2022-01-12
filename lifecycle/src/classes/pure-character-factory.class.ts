@@ -9,6 +9,7 @@ import {
 } from '../interfaces';
 import { PureElf } from './pure-elf.class';
 import { PureHuman } from './pure-human.class';
+import { PureMorph } from './pure-morph.class';
 
 export class PureCharacterFactory implements IAbstractCreatureFactory {
   public createHuman(data: ICreateHumanCharacterData): IHuman {
