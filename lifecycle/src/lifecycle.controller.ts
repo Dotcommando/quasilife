@@ -2,8 +2,8 @@ import { Controller, HttpStatus } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MessagePattern } from '@nestjs/microservices';
 
-import { LIFECYCLE_EVENT, LIFECYCLE_STATUS } from './constants';
-import { IResponse } from './interfaces';
+import { LIFECYCLE_EVENT, LIFECYCLE_STATUS, TIME_STREAM_STATUS } from './constants';
+import { IResponse, LifecycleActionReport } from './interfaces';
 import { LifecycleService } from './services';
 
 
@@ -15,7 +15,7 @@ export class LifecycleController {
   ) {}
 
   @MessagePattern(LIFECYCLE_EVENT.LIFECYCLE_START)
-  public async startLoop(): Promise<IResponse<{ done: boolean; ticks: number }, LIFECYCLE_STATUS>> {
+  public async startLoop(): Promise<LifecycleActionReport> {
     this.lifecycleService.startLoop();
 
     return {
@@ -23,6 +23,7 @@ export class LifecycleController {
       message: LIFECYCLE_STATUS.LIFECYCLE_START_OK,
       data: {
         ticks: this.lifecycleService.getTimesTicked(),
+        timeStreamStatus: this.lifecycleService.getTimeStreamStatus(),
         done: true,
       },
       errors: null,
@@ -30,7 +31,7 @@ export class LifecycleController {
   }
 
   @MessagePattern(LIFECYCLE_EVENT.LIFECYCLE_STOP)
-  public async stopLoop(): Promise<IResponse<{ done: boolean; ticks: number }, LIFECYCLE_STATUS>> {
+  public async stopLoop(): Promise<LifecycleActionReport> {
     this.lifecycleService.stopLoop();
 
     return {
@@ -38,6 +39,7 @@ export class LifecycleController {
       message: LIFECYCLE_STATUS.LIFECYCLE_STOP_OK,
       data: {
         ticks: this.lifecycleService.getTimesTicked(),
+        timeStreamStatus: this.lifecycleService.getTimeStreamStatus(),
         done: true,
       },
       errors: null,
@@ -45,12 +47,13 @@ export class LifecycleController {
   }
 
   @MessagePattern(LIFECYCLE_EVENT.LIFECYCLE_GET_TICK_NUMBER)
-  public async getTickNumber(): Promise<IResponse<{ ticks: number }, LIFECYCLE_STATUS>> {
+  public async getTickNumber(): Promise<IResponse<{ ticks: number; timeStreamStatus: TIME_STREAM_STATUS }, LIFECYCLE_STATUS>> {
     return {
       statusCode: HttpStatus.OK,
       message: LIFECYCLE_STATUS.LIFECYCLE_GET_TICK_NUMBER_OK,
       data: {
         ticks: this.lifecycleService.getTimesTicked(),
+        timeStreamStatus: this.lifecycleService.getTimeStreamStatus(),
       },
       errors: null,
     };

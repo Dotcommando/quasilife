@@ -7,3 +7,4 @@ export * from './lifecycle-event.enum';
 export * from './lifecycle-status.enum';
 export * from './race.enum';
 export * from './species.enum';
+export * from './time-stream-status.enum';

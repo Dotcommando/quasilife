@@ -1,15 +1,28 @@
 import { Controller, Get, HttpStatus, Inject, Post, Res } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ClientProxy } from '@nestjs/microservices';
-import { ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiPreconditionFailedResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 import { firstValueFrom } from 'rxjs';
 
 import { Response } from 'express';
 
-import { LIFECYCLE_EVENT, LIFECYCLE_STATUS } from './constants';
-import { GetVersionResponseOkDto } from './dtos/lifecycle';
-import { IResponse } from './interfaces';
+import { LIFECYCLE_EVENT, LIFECYCLE_STATUS, TIME_STREAM_STATUS } from './constants';
+import {
+  GetTicksResponseOkDto,
+  GetTicksResponsePreconditionFailedDto,
+  GetVersionResponseOkDto,
+  PostStartLoopResponseOkDto,
+  PostStartLoopResponsePreconditionFailedDto,
+  PostStopLoopResponseOkDto,
+  PostStopLoopResponsePreconditionFailedDto,
+} from './dtos/lifecycle';
+import { IResponse, LifecycleActionReport } from './interfaces';
 import { LifecycleService } from './services';
 
 @Controller('lifecycle')
@@ -52,13 +65,19 @@ export class LifecycleController {
   };
 
   @Post('start')
+  @ApiOkResponse({
+    type: PostStartLoopResponseOkDto,
+  })
+  @ApiPreconditionFailedResponse({
+    type: PostStartLoopResponsePreconditionFailedDto,
+  })
   public async startLoop(@Res() res: Response): Promise<void> {
     try {
-      const response: IResponse<{ done: boolean; ticks: number }, LIFECYCLE_STATUS> = await firstValueFrom(
+      const response: LifecycleActionReport = await firstValueFrom(
         this.lifecycleServiceClient.send(LIFECYCLE_EVENT.LIFECYCLE_START, {}),
       );
 
-      const finalResponse: IResponse<{ done: boolean }, LIFECYCLE_STATUS> = response
+      const finalResponse: LifecycleActionReport = response
         ? {
           statusCode: response.statusCode,
           message: response.message,
@@ -94,13 +113,19 @@ export class LifecycleController {
   }
 
   @Post('stop')
+  @ApiOkResponse({
+    type: PostStopLoopResponseOkDto,
+  })
+  @ApiPreconditionFailedResponse({
+    type: PostStopLoopResponsePreconditionFailedDto,
+  })
   public async stopLoop(@Res() res: Response): Promise<void> {
     try {
-      const response: IResponse<{ done: boolean; ticks: number }, LIFECYCLE_STATUS> = await firstValueFrom(
+      const response: LifecycleActionReport = await firstValueFrom(
         this.lifecycleServiceClient.send(LIFECYCLE_EVENT.LIFECYCLE_STOP, {}),
       );
 
-      const finalResponse: IResponse<{ done: boolean }, LIFECYCLE_STATUS> = response
+      const finalResponse: LifecycleActionReport = response
         ? {
           statusCode: response.statusCode,
           message: response.message,
@@ -112,7 +137,7 @@ export class LifecycleController {
           message: LIFECYCLE_STATUS.LIFECYCLE_STOP_PRECONDITION_FAILED,
           data: null,
           errors: {
-            start: 'Cannot stop loop',
+            stop: 'Cannot stop loop',
           },
         };
 
@@ -128,7 +153,7 @@ export class LifecycleController {
             message: LIFECYCLE_STATUS.LIFECYCLE_STOP_PRECONDITION_FAILED,
             data: null,
             errors: {
-              start: 'Cannot stop loop',
+              stop: 'Cannot stop loop',
             },
           },
         );
@@ -136,9 +161,15 @@ export class LifecycleController {
   }
 
   @Get('ticks')
+  @ApiOkResponse({
+    type: GetTicksResponseOkDto,
+  })
+  @ApiPreconditionFailedResponse({
+    type: GetTicksResponsePreconditionFailedDto,
+  })
   public async getTickNumber(@Res() res: Response): Promise<void> {
     try {
-      const response: IResponse<{ ticks: number }, LIFECYCLE_STATUS> = await firstValueFrom(
+      const response: IResponse<{ ticks: number; timeStreamStatus: TIME_STREAM_STATUS }, LIFECYCLE_STATUS> = await firstValueFrom(
         this.lifecycleServiceClient.send(LIFECYCLE_EVENT.LIFECYCLE_GET_TICK_NUMBER, {}),
       );
 
