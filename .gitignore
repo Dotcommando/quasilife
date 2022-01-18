@@ -1,6 +1,7 @@
 # compiled output
 **/dist
 **/node_modules
+**/build
 
 # Logs
 logs
@@ -35,9 +36,14 @@ lerna-debug.log*
 
 # Dependencies
 **/package-lock.json
+**/.pnp
 
 # Environment
 .env
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
 
 # Docker non-commitable files
 /docker/mongo/data/
